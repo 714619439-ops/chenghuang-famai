@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="全国城隍法脉疗愈 · 免费为全球青少年疗愈 · 四十二司护法系统">
+  <title>城隍法脉疗愈 · 首页</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3d2b1f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+
+  <!-- ====== 导航 ====== -->
+  <nav class="nav-bar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">☯ 城隍法脉</a>
+      <button class="nav-toggle" aria-label="菜单">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">首页</a></li>
+        <li><a href="all-si.html">四十二司</a></li>
+        <li><a href="about.html">认识法脉</a></li>
+        <li><a href="protect-youth.html">护青公益</a></li>
+        <li><a href="rituals.html">功课仪轨</a></li>
+        <li><a href="prayer-generator.html">祈请文生成</a></li>
+        <li><a href="contact.html">关于</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ====== 大愿横幅 ====== -->
+  <section class="hero">
+    <h1>城隍法脉 · 疗愈人间</h1>
+    <p class="subtitle">免费 · 公益 · 全球青少年身心疗愈</p>
+    <div class="vow">
+      <strong>【铁一锤大愿】</strong><br>
+      愿以此法脉，疗愈一切青少年身心之苦<br>
+      不问来处，不分贵贱，不取分文<br>
+      凡有祈请，必以诚应；凡有苦难，必以慈度
+    </div>
+  </section>
+
+  <!-- ====== 四大导航卡 ====== -->
+  <div class="container">
+    <div class="nav-cards">
+      <a href="all-si.html" class="nav-card">
+        <div class="icon">🏛️</div>
+        <h3>四十二司护法</h3>
+        <p>了解城隍座下四十二司署职能，找到对应的司署祈请</p>
+      </a>
+      <a href="protect-youth.html" class="nav-card">
+        <div class="icon">🌱</div>
+        <h3>护青公益计划</h3>
+        <p>免费为全国、全球青少年提供身心疗愈支持</p>
+      </a>
+      <a href="rituals.html" class="nav-card">
+        <div class="icon">📿</div>
+        <h3>功课仪轨</h3>
+        <p>早课 · 晚课 · 朔望日 · 莲花救度仪轨</p>
+      </a>
+      <a href="prayer-generator.html" class="nav-card">
+        <div class="icon">📜</div>
+        <h3>祈请文生成器</h3>
+        <p>选司号自动生成祈请文，一键复制</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- ====== 心育六司 ====== -->
+  <div class="container section">
+    <h2 class="section-title">❤️ 护青 · 心育六司</h2>
+    <p class="text-center fs-small mb-20" style="color: #6b4f3a;">
+      专为青少年身心健康设立的六大心育司署
+    </p>
+    <div class="xinyu-grid" id="xinyu-grid"></div>
+  </div>
+
+  <!-- ====== 快速了解 ====== -->
+  <div class="container section">
+    <h2 class="section-title">📖 快速了解城隍把脉</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>什么是城隍把脉？</h3>
+        <p>城隍把脉是城隍法脉中的一种疗愈方式，通过祈请四十二司护法，以正心正念调理身心失衡，化解冤结障碍，达到身心和谐。</p>
+      </div>
+      <div class="card">
+        <h3>为什么要免费？</h3>
+        <p>铁一锤发愿：法脉乃天地所赐，不可标价。凡以法脉谋利者，皆失其本。故一切疗愈皆免费，只为众生离苦得乐。</p>
+      </div>
+      <div class="card">
+        <h3>谁可以祈请？</h3>
+        <p>不分国籍、不分信仰、不分年龄。尤其欢迎有心理困扰的青少年、家庭有矛盾的父母、身心疲惫的成年人诚心祈请。</p>
+      </div>
+      <div class="card">
+        <h3>需要什么条件？</h3>
+        <p>只需一颗真诚的心。心诚则灵，心正则应。无需任何费用，无需特殊仪式，只需按照仪轨如法祈请。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== 页脚 ====== -->
+  <footer class="footer">
+    <p>☯ 城隍法脉疗愈 · 免费为全球青少年身心疗愈</p>
+    <p style="margin-top: 4px; font-size: 0.8rem;">
+      铁一锤大愿 · 不问来处 · 不取分文 · 以慈度众
+    </p>
+    <p style="margin-top: 12px; font-size: 0.75rem; color: rgba(255,255,255,0.4);">
+      本网站仅供公益学习交流 · 不涉及宗教组织
+    </p>
+  </footer>
+
+  <!-- ====== Toast ====== -->
+  <div class="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // 渲染心育六司
+    var grid = document.getElementById('xinyu-grid');
+    if (grid) {
+      XINYU_SIX.forEach(function(item) {
+        var div = document.createElement('div');
+        div.className = 'xinyu-card';
+        div.innerHTML = '<div class="xy-icon">' + item.icon + '</div>' +
+          '<h4>' + item.name + '</h4>' +
+          '<p>' + item.desc + '</p>';
+        grid.appendChild(div);
+      });
+    }
+  </script>
+
+  <script>
+    // 注册 Service Worker（PWA）
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="祈请文生成器 · 选司号自动生成祈请文 · 支持四十二司">
+  <title>祈请文生成 · 城隍法脉</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+  <nav class="nav-bar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">☯ 城隍法脉</a>
+      <button class="nav-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="all-si.html">四十二司</a></li>
+        <li><a href="about.html">认识法脉</a></li>
+        <li><a href="protect-youth.html">护青公益</a></li>
+        <li><a href="rituals.html">功课仪轨</a></li>
+        <li><a href="prayer-generator.html" class="active">祈请文生成</a></li>
+        <li><a href="contact.html">关于</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <h1>📜 祈请文生成器</h1>
+    <p>支持四十二司 · 选择对应司署 · 一键生成 · 复制使用</p>
+  </section>
+
+  <div class="generator-section">
+    <div class="generator-controls">
+      <form id="prayer-form">
+        <label for="si-select">① 选择司署（共42司）</label>
+        <select id="si-select" required>
+          <option value="">— 请选择司署 —</option>
+        </select>
+
+        <label for="prayer-name">② 您的称呼（姓名/法名）</label>
+        <input type="text" id="prayer-name" placeholder="例：张三" required>
+
+        <label for="prayer-matter">③ 祈请事项（简述您所求之事）</label>
+        <textarea id="prayer-matter" placeholder="例：为家中16岁孩子祈请学业顺利、身心健康" required></textarea>
+
+        <button type="submit" class="btn btn-gold">🙏 生成祈请文</button>
+        <button type="reset" class="btn btn-outline" style="margin-left:8px;">重置</button>
+      </form>
+    </div>
+
+    <div id="prayer-result">
+      <div class="prayer-box" style="text-align:center;color:var(--brown-light);">
+        <p style="padding:20px 0;">👆 填写上方信息后点击「生成祈请文」</p>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;padding:24px;background:var(--paper);border-radius:var(--radius);border:1px solid rgba(201,168,76,0.15);">
+      <h3 style="font-family:var(--font-serif);color:var(--brown-mid);margin-bottom:12px;">📖 使用说明</h3>
+      <ul>
+        <li style="margin-bottom:8px;color:var(--brown-mid);">① 先浏览<a href="all-si.html" style="color:var(--gold-dark);">四十二司</a>，了解各司职能后选择对应的司署</li>
+        <li style="margin-bottom:8px;color:var(--brown-mid);">② 填写您的姓名或法名，祈请时需以诚心念诵</li>
+        <li style="margin-bottom:8px;color:var(--brown-mid);">③ 简述祈请事项，越具体越能专注</li>
+        <li style="margin-bottom:8px;color:var(--brown-mid);">④ 生成后点击复制，然后在安静处诚心念诵即可</li>
+        <li style="color:var(--brown-light);font-size:0.85rem;">💡 念诵时收摄心神，一字一句清晰念出，效果更佳</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>☯ 城隍法脉疗愈 · 免费为全球青少年身心疗愈</p>
+    <p style="margin-top: 12px; font-size: 0.75rem; color: rgba(255,255,255,0.4);">本网站仅供公益学习交流 · 不涉及宗教组织</p>
+  </footer>
+
+  <div class="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // 合并两套数据到选择器
+    var select = document.getElementById('si-select');
+    if (select) {
+      var allSi = SI_DATA.concat(SIXI_DATA);
+      allSi.forEach(function(si) {
+        var opt = document.createElement('option');
+        opt.value = si.id || si.name;
+        // 给 SI_DATA 留 id，对 SIXI_DATA 用 name 做 value
+        if (!si.id) opt.value = si.name;
+        var label = si.icon + ' ' + si.name;
+        if (si.subtitle) label += ' — ' + si.subtitle;
+        opt.textContent = label;
+        select.appendChild(opt);
+      });
+    }
+  </script>
+  <script>
+    // 重写 generatePrayer 以支持双数据集查找
+    function generatePrayer() {
+      var siSelect = document.getElementById('si-select');
+      var nameInput = document.getElementById('prayer-name');
+      var matterInput = document.getElementById('prayer-matter');
+      var resultBox = document.getElementById('prayer-result');
+
+      var val = siSelect.value;
+      var name = nameInput.value.trim() || '___';
+      var matter = matterInput.value.trim() || '___';
+
+      var si = SI_DATA.find(function(s) { return s.id == val || s.name === val; })
+            || SIXI_DATA.find(function(s) { return s.name === val; });
+
+      if (!si) {
+        resultBox.innerHTML = '<div class="prayer-box"><p style="color:#b5412e;">请选择一个司署</p></div>';
+        return;
+      }
+
+      var parts = si.prayer ? si.prayer.split('___') : [];
+      if (parts.length < 2) {
+        resultBox.innerHTML = '<div class="prayer-box"><p style="color:#b5412e;">该司暂无祈请文</p></div>';
+        return;
+      }
+
+      var filled = '';
+      for (var i = 0; i < parts.length; i++) {
+        filled += parts[i];
+        if (i < parts.length - 1) {
+          if (i === 0) filled += name;
+          else if (i === 1) filled += matter;
+          else filled += '___';
+        }
+      }
+
+      var now = new Date();
+      filled = filled.replace('___ 年', now.getFullYear() + ' 年');
+      filled = filled.replace('___ 月', (now.getMonth() + 1) + ' 月');
+      filled = filled.replace('___ 日', now.getDate() + ' 日');
+
+      var html = '<div class="prayer-box">' +
+        '<div class="prayer-label">『 祈请 ' + si.name + ' 』</div>' +
+        '<div class="prayer-text" id="gen-prayer-text">' + filled + '</div>' +
+        '<button class="copy-btn" onclick="copyPrayerResult()">📋 复制</button>' +
+        '</div>';
+      resultBox.innerHTML = html;
+    }
+  </script>
+  <script>if('serviceWorker'in navigator){navigator.serviceWorker.register('sw.js');}</script>
+</body>
+</html>

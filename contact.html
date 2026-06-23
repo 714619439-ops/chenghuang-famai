@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="关于城隍法脉 · 铁一锤介绍 · 联系方式">
+  <title>关于我们 · 城隍法脉</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+  <nav class="nav-bar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">☯ 城隍法脉</a>
+      <button class="nav-toggle" aria-label="菜单">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="all-si.html">四十二司</a></li>
+        <li><a href="about.html">认识法脉</a></li>
+        <li><a href="protect-youth.html">护青公益</a></li>
+        <li><a href="rituals.html">功课仪轨</a></li>
+        <li><a href="prayer-generator.html">祈请文生成</a></li>
+        <li><a href="contact.html" class="active">关于</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <h1>🙏 关于我们</h1>
+    <p>铁一锤 · 发心人 · 联系方式</p>
+  </section>
+
+  <div class="container section">
+    <!-- 铁一锤介绍 -->
+    <h2 class="section-title">🔨 铁一锤</h2>
+    <div style="max-width:680px;margin:0 auto 40px;text-align:center;">
+      <div style="font-size:4rem;margin-bottom:16px;">🔨</div>
+      <p style="margin-bottom:16px;line-height:1.9;">
+        <strong>铁一锤</strong>，城隍法脉发起人。发愿以城隍法脉免费疗愈全球青少年身心之苦。
+      </p>
+      <p style="margin-bottom:16px;line-height:1.9;">
+        一锤定音，万法归心。铁一锤代表的是<strong>坚定的愿力</strong>和<strong>不拔的决心</strong>——
+        愿以此身护持法脉，愿以此心普度众生。
+      </p>
+      <p style="line-height:1.9;color:var(--brown-light);">
+        「不取分文，不问来处，不分贵贱。凡有祈请，必以诚应；凡有苦难，必以慈度。」
+      </p>
+    </div>
+
+    <!-- 发心人 -->
+    <h2 class="section-title">💝 发心人</h2>
+    <div style="max-width:680px;margin:0 auto 40px;">
+      <p class="text-center" style="line-height:1.9;margin-bottom:20px;">
+        城隍法脉由一众发心人共同护持。他们来自各行各业，有心理咨询师、教师、医务工作者、普通家长……
+      </p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>🙋 心理咨询师</h3>
+          <p>将法脉与心理疏导相结合，为青少年提供更全面的身心支持</p>
+        </div>
+        <div class="card">
+          <h3>👩‍🏫 教育工作者</h3>
+          <p>在校园中传播正念，帮助有需要的学生接触法脉</p>
+        </div>
+        <div class="card">
+          <h3>👪 家长</h3>
+          <p>通过自身实践法脉受益后，将其分享给更多家庭</p>
+        </div>
+        <div class="card">
+          <h3>🌐 网络志愿者</h3>
+          <p>维护网站、制作内容，让法脉通过网络传播更远</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 联系 -->
+    <h2 class="section-title">📬 联系方式</h2>
+    <div style="max-width:680px;margin:0 auto;">
+      <div style="background:var(--paper);border:1px solid rgba(201,168,76,0.2);border-radius:var(--radius);padding:28px;text-align:center;">
+        <p style="margin-bottom:16px;color:var(--brown-mid);">
+          📧 邮箱：
+          <a href="mailto:chenghuangfamai@126.com" style="color:var(--gold-dark);text-decoration:none;">
+            chenghuangfamai@126.com
+          </a>
+        </p>
+        <p style="margin-bottom:16px;color:var(--brown-light);font-size:0.9rem;">
+          💬 微信公众号：城隍法脉疗愈
+        </p>
+        <p style="color:var(--brown-light);font-size:0.85rem;">
+          ⚠️ 本网站仅供公益学习交流使用 · 不涉及宗教组织<br>
+          所有内容免费共享 · 欢迎转载分享
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>☯ 城隍法脉疗愈 · 免费为全球青少年身心疗愈</p>
+    <p style="margin-top: 4px; font-size: 0.8rem;">
+      铁一锤大愿 · 不问来处 · 不取分文 · 以慈度众
+    </p>
+    <p style="margin-top: 12px; font-size: 0.75rem; color: rgba(255,255,255,0.4);">
+      本网站仅供公益学习交流 · 不涉及宗教组织
+    </p>
+  </footer>
+
+  <div class="toast"></div>
+
+  <script src="js/main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+</html>

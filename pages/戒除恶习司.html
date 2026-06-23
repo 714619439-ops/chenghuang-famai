@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>司详情 - 城隍法脉·四十二司护法系统</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap");
+  </style>
+</head>
+<body>
+
+  <!-- ===== 导航 ===== -->
+  <nav>
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">城隍<span>法脉</span></a>
+      <button class="nav-toggle" aria-label="切换导航">☰</button>
+      <ul class="nav-links">
+        <li><a href="../index.html">首页</a></li>
+        <li><a href="../all-si.html">四十二司</a></li>
+        <li><a href="../protect-youth.html">护青</a></li>
+        <li><a href="../prayer-generator.html">祈请文</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== 主内容 ===== -->
+  <div class="container">
+
+    <!-- 面包屑 -->
+    <div class="breadcrumb">
+      <a href="../index.html">首页</a> / <a href="../all-si.html">四十二司</a> / <span id="breadcrumb-current">司详情</span>
+    </div>
+
+    <!-- 司头部 -->
+    <div id="si-header"></div>
+
+    <!-- 司功能 -->
+    <section class="card">
+      <h2 class="section-title"><span class="icon">✦</span>本司职能</h2>
+      <ul id="si-funcs" class="func-list"></ul>
+    </section>
+
+    <!-- 适用场景 -->
+    <section class="card">
+      <h2 class="section-title"><span class="icon">☸</span>适用场景</h2>
+      <div id="si-scenarios" class="tags"></div>
+    </section>
+
+    <!-- 日常养护 -->
+    <section class="card">
+      <h2 class="section-title"><span class="icon">🌿</span>日常养护</h2>
+      <ul id="si-care" class="func-list"></ul>
+    </section>
+
+    <!-- 祈请文 -->
+    <section class="card card-gold">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-sm);flex-wrap:wrap;gap:0.5rem;">
+        <h2 class="section-title" style="border:none;margin:0;padding:0;"><span class="icon">🙏</span>祈请文</h2>
+        <button id="copy-prayer" class="copy-btn">📋 复制祈请文</button>
+      </div>
+      <pre id="si-prayer" class="prayer-text"></pre>
+    </section>
+
+    <!-- 司导航 -->
+    <section class="card" style="text-align:center;">
+      <h2 class="section-title" style="text-align:center;"><span class="icon">☸</span>四十二司导航</h2>
+      <div id="si-nav" class="tags" style="justify-content:center;margin-top:1rem;"></div>
+    </section>
+
+  </div>
+
+  <!-- ===== 页脚 ===== -->
+  <footer>
+    <div class="footer-brand">城隍法脉 · 四十二司护法系统</div>
+    <div class="footer-oath">冥阳苦未尽，誓不成佛道；十方若有苦，寻声必救度</div>
+    <p>南无幽冥教主地藏王菩萨 &nbsp;·&nbsp; 南无护法韦驮尊天菩萨</p>
+    <p style="margin-top:0.5rem;">当境城隍尊神 &nbsp;·&nbsp; 土地正神 &nbsp;·&nbsp; 家宅六神</p>
+  </footer>
+
+  <!-- ===== 返回顶部 ===== -->
+  <button class="back-top" aria-label="返回顶部">↑</button>
+
+  <!-- ===== 脚本 ===== -->
+  <script src="../js/data.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 从文件名识别司名（如 "阴阳司.html" -> "阴阳司"）
+      var filename = window.location.pathname.split('/').pop();
+      var siName = filename.replace('.html', '');
+
+      // 同时查询 SI_DATA（新增21司）和 SIXI_DATA（原有21司）
+      var si = SI_DATA.find(function(s) { return s.name === siName; })
+            || SIXI_DATA.find(function(s) { return s.name === siName; });
+
+      if (!si) si = SI_DATA[0] || SIXI_DATA[0];
+      renderSiPage(si);
+      document.getElementById('breadcrumb-current').textContent = si.name;
+
+      // 合并两套数据生成四十二司导航
+      var allSi = SI_DATA.concat(SIXI_DATA);
+      var navEl = document.getElementById('si-nav');
+      if (navEl) {
+        var html = '';
+        for (var j = 0; j < allSi.length; j++) {
+          var s = allSi[j];
+          var activeClass = (s.name === si.name) ? ' tag-youth' : '';
+          html += '<a href="' + s.name + '.html" class="tag' + activeClass + '">' + s.name + '</a>';
+        }
+        navEl.innerHTML = html;
+      }
+    });
+  </script>
+
+</body>
+</html>

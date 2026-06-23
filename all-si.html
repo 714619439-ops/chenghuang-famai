@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="城隍座下四十二司护法系统总览">
+  <title>四十二司 · 城隍法脉</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+  <nav class="nav-bar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">☯ 城隍法脉</a>
+      <button class="nav-toggle" aria-label="菜单">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="all-si.html" class="active">四十二司</a></li>
+        <li><a href="about.html">认识法脉</a></li>
+        <li><a href="protect-youth.html">护青公益</a></li>
+        <li><a href="rituals.html">功课仪轨</a></li>
+        <li><a href="prayer-generator.html">祈请文生成</a></li>
+        <li><a href="contact.html">关于</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <h1>🏛️ 四十二司护法系统</h1>
+    <p>城隍座下 · 四十二司署 · 各司其职 · 护佑苍生</p>
+  </section>
+
+  <div class="container section">
+    <div class="breadcrumb"><a href="index.html">首页</a> › 四十二司</div>
+    <p class="text-center fs-small mb-20" style="color: #6b4f3a;">
+      共四十二司 · 点击卡片查看详细职能、适用场景、养护建议及祈请文
+    </p>
+
+    <div style="margin-bottom:20px;text-align:center;">
+      <button class="btn btn-gold" onclick="filterSi('all')" style="margin:4px;">全部 42司</button>
+      <button class="btn btn-outline" onclick="filterSi('new')" style="margin:4px;">新增 21司</button>
+      <button class="btn btn-outline" onclick="filterSi('old')" style="margin:4px;">原版 21司</button>
+    </div>
+
+    <div class="card-grid" id="si-grid"></div>
+  </div>
+
+  <footer class="footer">
+    <p>☯ 城隍法脉疗愈 · 免费为全球青少年身心疗愈</p>
+    <p style="margin-top: 12px; font-size: 0.75rem; color: rgba(255,255,255,0.4);">本网站仅供公益学习交流 · 不涉及宗教组织</p>
+  </footer>
+
+  <div class="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // 合并两套数据，标记来源
+    var ALL_SI = SI_DATA.map(function(s) { s._source = 'new'; return s; })
+      .concat(SIXI_DATA.map(function(s) { s._source = 'old'; return s; }));
+
+    var currentFilter = 'all';
+
+    function renderGrid(filter) {
+      currentFilter = filter;
+      var grid = document.getElementById('si-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      var list = ALL_SI;
+      if (filter === 'new') list = SI_DATA;
+      else if (filter === 'old') list = SIXI_DATA;
+
+      list.forEach(function(si) {
+        var div = document.createElement('a');
+        div.href = 'pages/' + si.name + '.html';
+        div.className = 'card';
+        var tag = si._source === 'new' ? '✨ 新增' : '📜 原版';
+        div.innerHTML =
+          '<h3>' + (si.icon || '☯') + ' ' + si.name + '</h3>' +
+          '<p style="font-size:0.8rem;color:#c9a84c;margin-bottom:6px;">' + (si.subtitle || '') + '</p>' +
+          '<p>' + (si.summary ? si.summary.slice(0, 50) + '…' : '') + '</p>' +
+          '<span class="tag">' + tag + '</span>';
+        grid.appendChild(div);
+      });
+
+      // 更新按钮样式
+      document.querySelectorAll('[onclick^="filterSi"]').forEach(function(btn) {
+        btn.className = 'btn btn-outline';
+      });
+      var activeBtn = document.querySelector('[onclick="filterSi(\'' + filter + '\')"]');
+      if (activeBtn) activeBtn.className = 'btn btn-gold';
+    }
+
+    function filterSi(type) { renderGrid(type); }
+
+    renderGrid('all');
+  </script>
+  <script>if('serviceWorker'in navigator){navigator.serviceWorker.register('sw.js');}</script>
+</body>
+</html>
