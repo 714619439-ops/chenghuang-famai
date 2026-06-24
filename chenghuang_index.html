@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="城隍法脉·二十一司护法系统，免费为全天下青少年提供护持体系。">
+  <title>城隍爷 · 二十司城隍体系</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1A0F0A">
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">城隍<span>爷</span></a>
+      <button class="nav-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">首页</a></li>
+        <li><a href="all-si.html">二十司</a></li>
+        <li><a href="about.html">关于城隍</a></li>
+        <li><a href="protect-youth.html">护佑青少年</a></li>
+        <li><a href="rituals.html">拜祭仪轨</a></li>
+        <li><a href="prayer-generator.html">祈福文疏</a></li>
+        <li><a href="contact.html">联系</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <!-- ===== 封面横幅（重新设计） ===== -->
+      <div class="banner-dharma fade-in">
+        <span class="corner-deco tl">◈</span>
+        <span class="corner-deco tr">◈</span>
+        <span class="corner-deco bl">◈</span>
+        <span class="corner-deco br">◈</span>
+        <p>城隍法脉·二十一司护法系统</p>
+        <div class="oath">阳间三世<br>积善是宝</div>
+        <div class="oath-sub">阴间三善自有公平 · 请君深信因果</div>
+        <div class="btn-group">
+          <a href="about.html" class="btn btn-primary">了解城隍</a>
+          <a href="protect-youth.html" class="btn btn-gold">护佑青少年</a>
+          <a href="all-si.html" class="btn btn-outline">二十司</a>
+        </div>
+      </div>
+
+      <!-- ===== 四大功能卡片 ===== -->
+      <div class="grid grid-2" style="margin-bottom:var(--space-lg)">
+        <div class="card fade-in" style="text-align:center">
+          <div style="font-size:2.5rem;margin-bottom:var(--space-sm)">🏷️</div>
+          <h3 style="margin-bottom:var(--space-xs);font-size:1.1rem;color:var(--gold-light)">二十司巡城</h3>
+          <p style="color:var(--text-secondary);font-size:0.85rem;line-height:1.7">巡按二十司体系，寅时对应，每司时辰对应司衙当值</p>
+          <a href="all-si.html" style="color:var(--gold);text-decoration:none;font-size:0.82rem;display:inline-block;margin-top:var(--space-sm)">查看全部 →</a>
+        </div>
+        <div class="card fade-in" style="text-align:center">
+          <div style="font-size:2.5rem;margin-bottom:var(--space-sm)">💚</div>
+          <h3 style="margin-bottom:var(--space-xs);font-size:1.1rem;color:var(--gold-light)">护佑青少年</h3>
+          <p style="color:var(--text-secondary);font-size:0.85rem;line-height:1.7">免费为全天下青少年提供护持体系，为学子祈福</p>
+          <a href="protect-youth.html" style="color:var(--gold);text-decoration:none;font-size:0.82rem;display:inline-block;margin-top:var(--space-sm)">了解护佑 →</a>
+        </div>
+        <div class="card fade-in" style="text-align:center">
+          <div style="font-size:2.5rem;margin-bottom:var(--space-sm)">🌸</div>
+          <h3 style="margin-bottom:var(--space-xs);font-size:1.1rem;color:var(--gold-light)">拜祭仪轨</h3>
+          <p style="color:var(--text-secondary);font-size:0.85rem;line-height:1.7">早晚拜祭·烧香祈福·诚心祈愿，全程指引</p>
+          <a href="rituals.html" style="color:var(--gold);text-decoration:none;font-size:0.82rem;display:inline-block;margin-top:var(--space-sm)">学习仪轨 →</a>
+        </div>
+        <div class="card fade-in" style="text-align:center">
+          <div style="font-size:2.5rem;margin-bottom:var(--space-sm)">🙏</div>
+          <h3 style="margin-bottom:var(--space-xs);font-size:1.1rem;color:var(--gold-light)">祈福文疏生成</h3>
+          <p style="color:var(--text-secondary);font-size:0.85rem;line-height:1.7">在线即可使用文疏生成器，一键生成，随时使用</p>
+          <a href="prayer-generator.html" style="color:var(--gold);text-decoration:none;font-size:0.82rem;display:inline-block;margin-top:var(--space-sm)">开始生成 →</a>
+        </div>
+      </div>
+
+      <!-- ===== 分隔线 ===== -->
+      <div class="divider">✦ ✦ ✦</div>
+
+      <!-- ===== 护佑青少年内容（JS动态渲染） ===== -->
+      <div class="page-header">
+        <h1>因果实录</h1>
+        <p style="color:var(--text-muted)">护佑青少年体系 · 十二城隍庙二十司共同护持的因果教育实录</p>
+      </div>
+      <div class="heart-six" id="heart-six-grid"></div>
+      <div style="text-align:center;margin-top:var(--space-md)"><a href="protect-youth.html" class="btn btn-gold">了解护佑青少年详情</a></div>
+
+      <!-- ===== 分隔线 ===== -->
+      <div class="divider">✤ ✤ ✤</div>
+
+      <!-- ===== 底部寄语 ===== -->
+      <div style="text-align:center;padding:var(--space-xl) 0;max-width:700px;margin:0 auto">
+        <p style="font-size:0.85rem;color:var(--text-muted);letter-spacing:4px;margin-bottom:var(--space-md)">—— 巡按人间 · 城隍爷 ——</p>
+        <p style="font-size:0.95rem;line-height:2.2;color:var(--text-secondary)">
+          城隍爷者，聪明正直之谓，一灵不昧谓之聪，<br>察奸察佞谓之明，刚肠疾恶谓之正，<br>正直无私谓之直。惟聪明故不能欺，<br>惟正直故不可欺。明则能察，直则敢为。
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-brand">城隍爷 · 二十司城隍体系</div>
+    <div class="footer-oath">阳间三世 · 积善是宝 · 阴间三善自有公平 · 请君深信因果</div>
+    <p>城隍庙文化 · 不可用于非法用途 · 不可用于赌博或任何违法活动</p>
+    <p style="margin-top:var(--space-xs);opacity:0.6">自用祈福可，因果不虚，多行善事</p>
+    <p style="margin-top:var(--space-md);opacity:0.4">传统民俗文化 · 成都普照寺</p>
+  </footer>
+
+  <button class="back-top">↑</button>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    var heartIds = [5, 6, 2, 7, 1, 20];
+    var grid = document.getElementById('heart-six-grid');
+    if (grid) {
+      var html = '';
+      heartIds.forEach(function(id) {
+        var si = SIXI_DATA[id - 1];
+        if (!si) return;
+        html += '<div class="card card-gold fade-in">' +
+          '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:var(--space-sm)">' +
+            '<div><span style="font-size:0.75rem;color:var(--gold);font-family:var(--font-sans);letter-spacing:2px">第' + (id < 10 ? '0' : '') + id + '司</span>' +
+            '<h3 style="margin:0.2rem 0;font-size:1.1rem;color:var(--gold-light)">' + si.name + '</h3></div>' +
+            '<span class="tag tag-youth">护佑青少年</span>' +
+          '</div>' +
+          '<p style="color:var(--text-muted);font-size:0.82rem;margin-bottom:var(--space-sm)">' + si.god1 + (si.god2 ? ' · ' + si.god2 : '') + '</p>' +
+          '<p style="font-size:0.88rem;line-height:1.8;color:var(--text-secondary)">' + si.desc + '</p>' +
+          '<a href="pages/' + si.name + '.html" style="color:var(--gold);text-decoration:none;font-size:0.8rem;display:inline-block;margin-top:var(--space-sm)">查看详情 →</a>' +
+        '</div>';
+      });
+      grid.innerHTML = html;
+    }
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+  </script>
+</body>
+</html>
