@@ -78,7 +78,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var filename = window.location.pathname.split('/').pop();
-      var siName = decodeURIComponent(filename.replace('.html', '');
+      var siName = decodeURIComponent(filename.replace('.html', ''));
       var si = null;
       for (var i = 0; i < SIXI_DATA.length; i++) {
         if (SIXI_DATA[i].name === siName) { si = SIXI_DATA[i]; break; }
