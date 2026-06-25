@@ -32,6 +32,11 @@
 
       <div id="si-header"></div>
 
+      <section class="card" id="si-intro-section" style="display:none">
+        <h2 class="section-title"><span class="icon">📖</span>本司释义</h2>
+        <div id="si-intro" style="line-height:2;color:var(--text-secondary);font-size:0.92rem;white-space:pre-wrap"></div>
+      </section>
+
       <div class="divider">✦ ✦ ✦</div>
 
       <section class="card">
@@ -86,6 +91,14 @@
       if (!si) si = SIXI_DATA[0];
       renderSiPage(si);
       document.getElementById('breadcrumb-current').textContent = si.name;
+
+      // 显示本司释义
+      var introEl = document.getElementById('si-intro');
+      var introSection = document.getElementById('si-intro-section');
+      if (introEl && si.intro) {
+        introEl.textContent = si.intro;
+        introSection.style.display = 'block';
+      }
 
       // 二十一司导航
       var navEl = document.getElementById('si-nav');
