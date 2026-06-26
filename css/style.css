@@ -1,6 +1,5 @@
-/* ===== 城隍法脉 · 全新封面设计 v3.0 ===== */
+/* ===== 城隍法脉 · 完整样式 v3.1 ===== */
 /* 传统庙宇风格 · 庄重典雅 · 金色暖调 */
-
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap');
 
 :root {
@@ -35,9 +34,7 @@
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
 html { font-size: 16px; scroll-behavior: smooth; }
-
 body {
   font-family: var(--font-serif);
   color: var(--text-primary);
@@ -57,13 +54,11 @@ nav {
   border-bottom: 1px solid var(--border);
   padding: 0 var(--space-md);
 }
-
 .nav-inner {
   max-width: 1200px; margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between;
   height: 64px;
 }
-
 .nav-brand {
   font-family: var(--font-hand);
   font-size: 1.5rem; color: var(--text-primary);
@@ -71,7 +66,6 @@ nav {
   text-shadow: 0 0 20px var(--gold-glow);
 }
 .nav-brand span { color: var(--gold); }
-
 .nav-links { display: flex; gap: 0.15rem; list-style: none; }
 .nav-links a {
   font-family: var(--font-sans); font-size: 0.82rem;
@@ -84,19 +78,13 @@ nav {
   color: var(--gold); background: var(--bg-gold-light);
   border: 1px solid var(--border);
 }
-
 .nav-toggle { display: none; background: none; border: 1px solid var(--border); border-radius: 8px; font-size: 1.3rem; color: var(--gold); cursor: pointer; padding: 0.3rem 0.6rem; }
-
-@media (max-width: 900px) {
-  .nav-toggle { display: block; }
-  .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--bg-main); border-bottom: 1px solid var(--border); flex-direction: column; padding: var(--space-sm); }
-  .nav-links.open { display: flex; }
-}
 
 /* ===== 容器 ===== */
 .container { max-width: 1000px; margin: 0 auto; padding: var(--space-lg) var(--space-md); }
+.container-wide { max-width: 1200px; }
 
-/* ===== ★★★ 封面横幅（重点设计）★★★ ===== */
+/* ===== 封面横幅 ===== */
 .banner-dharma {
   text-align: center;
   padding: var(--space-xl) var(--space-md);
@@ -109,9 +97,9 @@ nav {
     radial-gradient(ellipse at 70% 80%, rgba(255, 200, 80, 0.06) 0%, transparent 50%),
     var(--bg-main);
   border: 1px solid var(--border);
+  transition: box-shadow 0.5s ease;
 }
-
-/* 装饰性顶部花纹 */
+.banner-dharma:hover { box-shadow: 0 0 60px var(--shadow-gold); }
 .banner-dharma::before {
   content: '';
   position: absolute;
@@ -120,126 +108,68 @@ nav {
   background: linear-gradient(90deg, transparent, var(--gold), var(--red), var(--gold), transparent);
   opacity: 0.6;
 }
-
-/* 角落装饰 */
-.banner-dharma .corner-deco {
-  position: absolute;
-  font-size: 1.2rem;
-  color: var(--gold);
-  opacity: 0.12;
-  font-family: var(--font-serif);
-}
+.banner-dharma .corner-deco { position: absolute; font-size: 1.2rem; color: var(--gold); opacity: 0.12; font-family: var(--font-serif); }
 .banner-dharma .corner-deco.tl { top: 15px; left: 20px; }
 .banner-dharma .corner-deco.tr { top: 15px; right: 20px; }
 .banner-dharma .corner-deco.bl { bottom: 15px; left: 20px; }
 .banner-dharma .corner-deco.br { bottom: 15px; right: 20px; }
-
-/* "城隍法脉·二十一司护法系统" 副标题 */
 .banner-dharma p:first-child {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-bottom: var(--space-sm);
-  letter-spacing: 4px;
-  position: relative;
-  display: inline-block;
-  padding: 0 20px;
+  font-size: 0.85rem; color: var(--text-muted);
+  margin-bottom: var(--space-sm); letter-spacing: 4px;
+  position: relative; display: inline-block; padding: 0 20px;
 }
 .banner-dharma p:first-child::before,
 .banner-dharma p:first-child::after {
-  content: '◆';
-  font-size: 0.5rem;
-  color: var(--gold);
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  content: '◆'; font-size: 0.5rem; color: var(--gold);
+  position: absolute; top: 50%; transform: translateY(-50%);
 }
 .banner-dharma p:first-child::before { left: -5px; }
 .banner-dharma p:first-child::after { right: -5px; }
-
-/* 核心誓言 - "阳间三世 积善是宝" */
 .banner-dharma .oath {
   font-family: var(--font-hand);
-  font-size: 3.5rem;
-  font-weight: 400;
-  letter-spacing: 14px;
-  line-height: 1.5;
+  font-size: 3.5rem; font-weight: 400;
+  letter-spacing: 14px; line-height: 1.5;
   color: var(--gold-light);
-  text-shadow:
-    0 0 40px var(--gold-glow),
-    0 0 80px var(--gold-glow),
-    0 2px 4px rgba(0,0,0,0.5);
-  position: relative;
-  display: inline-block;
-  padding: 0.5rem 3rem;
+  text-shadow: 0 0 40px var(--gold-glow), 0 0 80px var(--gold-glow), 0 2px 4px rgba(0,0,0,0.5);
+  position: relative; display: inline-block; padding: 0.5rem 3rem;
+  animation: oathGlow 4s ease-in-out infinite;
 }
-
-/* 誓言左右的金色竖线装饰 */
+@keyframes oathGlow { 0%, 100% { text-shadow: 0 0 40px var(--gold-glow), 0 0 80px var(--gold-glow); } 50% { text-shadow: 0 0 60px var(--gold-glow), 0 0 120px rgba(255, 200, 80, 0.5), 0 0 180px rgba(255, 200, 80, 0.3); } }
 .banner-dharma .oath::before,
 .banner-dharma .oath::after {
   content: '';
-  position: absolute;
-  top: 10%;
-  bottom: 10%;
-  width: 1px;
+  position: absolute; top: 10%; bottom: 10%; width: 1px;
   background: linear-gradient(180deg, transparent, var(--gold), transparent);
   opacity: 0.4;
 }
 .banner-dharma .oath::before { left: 0.5rem; }
 .banner-dharma .oath::after { right: 0.5rem; }
-
-/* "阴间三善自有公平 · 请君深信因果" */
 .banner-dharma .oath-sub {
-  font-size: 1.05rem;
-  color: var(--text-secondary);
-  margin-top: var(--space-md);
-  letter-spacing: 6px;
-  font-family: var(--font-sans);
-  position: relative;
-  display: inline-block;
+  font-size: 1.05rem; color: var(--text-secondary);
+  margin-top: var(--space-md); letter-spacing: 6px;
+  font-family: var(--font-sans); position: relative; display: inline-block;
 }
-
-/* 按钮区域 */
 .banner-dharma .btn-group {
   margin-top: var(--space-lg);
-  display: flex;
-  gap: var(--space-sm);
-  justify-content: center;
-  flex-wrap: wrap;
+  display: flex; gap: var(--space-sm); justify-content: center; flex-wrap: wrap;
 }
 
 /* ===== 按钮 ===== */
 .btn {
-  display: inline-block;
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
-  font-weight: 500;
-  padding: 0.7rem 2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: all 0.3s;
-  cursor: pointer;
-  border: none;
-  line-height: 1.4;
-  letter-spacing: 2px;
+  display: inline-block; font-family: var(--font-sans);
+  font-size: 0.85rem; font-weight: 500;
+  padding: 0.7rem 2rem; border-radius: 8px;
+  text-decoration: none; transition: all 0.3s;
+  cursor: pointer; border: none; line-height: 1.4; letter-spacing: 2px;
 }
-.btn-primary {
-  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-  color: #050302;
-  font-weight: 600;
-}
+.btn-primary { background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: #050302; font-weight: 600; }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 30px var(--gold-glow); }
-.btn-gold {
-  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-  color: #050302;
-  font-weight: 600;
-}
+.btn-gold { background: linear-gradient(135deg, var(--gold-dark), var(--gold)); color: #050302; font-weight: 600; }
 .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 30px var(--gold-glow); }
-.btn-outline {
-  background: transparent;
-  color: var(--gold);
-  border: 1px solid var(--border-gold);
-}
+.btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--border-gold); }
 .btn-outline:hover { background: var(--bg-gold-light); border-color: var(--gold); transform: translateY(-2px); }
+.btn-sm { font-size: 0.78rem; padding: 0.4rem 1.2rem; }
+.copy-btn { cursor: pointer; }
 
 /* ===== 卡片 ===== */
 .card {
@@ -250,24 +180,15 @@ nav {
   margin-bottom: var(--space-md);
   transition: all 0.3s ease;
 }
-.card:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--border-gold);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 40px var(--shadow);
-}
-.card-gold {
-  border-color: var(--border-gold);
-  border-left: 3px solid var(--gold);
-  background: var(--bg-card);
-}
+.card:hover { background: var(--bg-card-hover); border-color: var(--border-gold); transform: translateY(-3px); box-shadow: 0 8px 40px var(--shadow); }
+.card-gold { border-color: var(--border-gold); border-left: 3px solid var(--gold); background: var(--bg-card); }
 .card-gold:hover { box-shadow: 0 8px 40px var(--shadow-gold); }
 .card-silver { border-left: 3px solid var(--text-muted); }
 
 /* ===== 网格 ===== */
 .grid { display: grid; gap: var(--space-md); }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
-@media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
 
 /* ===== 页面标题 ===== */
 .page-header { text-align: center; padding: var(--space-xl) 0 var(--space-lg); }
@@ -276,7 +197,7 @@ nav {
 .page-header h1 { font-size: 2.4rem; font-weight: 700; letter-spacing: 6px; color: var(--text-primary); }
 .page-header p { color: var(--text-muted); max-width: 600px; margin: var(--space-sm) auto 0; font-size: 0.9rem; letter-spacing: 2px; font-family: var(--font-sans); }
 
-/* ===== 寺庙网格 ===== */
+/* ===== 二十一司网格 ===== */
 .si-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-sm); }
 .si-card {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
@@ -287,8 +208,68 @@ nav {
 .si-card:hover::before { opacity: 1; }
 .si-card:hover { border-color: var(--border-gold); background: var(--bg-card-hover); transform: translateY(-4px); box-shadow: 0 12px 40px var(--shadow); }
 
+/* ===== 手风琴（二十一司详情） ===== */
+.accordion {
+  display: flex; justify-content: space-between; align-items: center;
+  width: 100%; padding: 1rem 1.2rem;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 0.25rem;
+  color: var(--text-primary); font-size: 1rem; font-family: var(--font-sans);
+  cursor: pointer; transition: all 0.3s; text-align: left;
+}
+.accordion:hover { background: var(--bg-card-hover); border-color: var(--border-gold); }
+.accordion.active { border-color: var(--gold); background: var(--bg-gold-light); }
+.accordion .arrow { transition: transform 0.3s; color: var(--gold); font-size: 0.8rem; }
+.accordion.active .arrow { transform: rotate(180deg); }
+.accordion .si-num { color: var(--gold); font-size: 0.78rem; font-family: var(--font-sans); letter-spacing: 1px; margin-right: 0.8rem; }
+.accordion .si-name { font-family: var(--font-serif); color: var(--gold-light); }
+.accordion .si-gods { color: var(--text-muted); font-size: 0.78rem; font-family: var(--font-sans); margin-left: 0.5rem; }
+.accordion-panel {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  padding: 0 1.2rem; border-left: 2px solid var(--border-gold);
+  margin-bottom: 0; border-radius: 0 0 var(--radius) var(--radius);
+  background: rgba(255, 248, 240, 0.02);
+}
+.accordion-panel.open {
+  max-height: 2000px;
+  padding: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.accordion-panel .section-title {
+  color: var(--gold); font-size: 0.82rem; font-family: var(--font-sans);
+  letter-spacing: 2px; margin-bottom: 0.3rem; margin-top: 0.8rem;
+}
+.accordion-panel .section-title:first-child { margin-top: 0; }
+.accordion-panel p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.9; margin-bottom: 0.8rem; }
+.accordion-panel .care-list { color: var(--text-muted); font-size: 0.82rem; line-height: 1.9; padding-left: 1.2rem; }
+.accordion-panel .care-list li { margin-bottom: 0.2rem; }
+.accordion-panel .care-list li::marker { color: var(--gold); }
+.accordion-panel .prayer-text {
+  background: rgba(255, 200, 80, 0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  font-size: 0.85rem;
+  line-height: 2;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  font-family: var(--font-serif);
+}
+
 /* ===== 心六宫格 ===== */
 .heart-six { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-md); }
+
+/* ===== 标签 ===== */
+.tag {
+  display: inline-block; font-family: var(--font-sans); font-size: 0.72rem;
+  padding: 0.2rem 0.8rem; background: rgba(255, 200, 80, 0.06);
+  color: var(--text-secondary); border: 1px solid var(--border);
+  border-radius: 20px; transition: all 0.2s;
+}
+.tag:hover { border-color: var(--border-gold); color: var(--gold); }
+.tag-youth { background: rgba(100, 180, 100, 0.08); color: #8BC88B; border-color: rgba(100, 180, 100, 0.15); }
+.si-badge { font-size: 0.72rem; color: var(--gold); font-family: var(--font-sans); letter-spacing: 1px; }
 
 /* ===== 分隔线 ===== */
 .divider { text-align: center; padding: var(--space-lg) 0; color: var(--gold); font-size: 1rem; letter-spacing: 12px; opacity: 0.3; }
@@ -311,30 +292,155 @@ footer p { color: var(--text-muted); font-size: 0.75rem; font-family: var(--font
 .back-top.visible { opacity: 1; }
 .back-top.visible:hover { transform: translateY(-3px); box-shadow: 0 6px 30px var(--gold-glow); }
 
-/* ===== 动画 ===== */
-@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.fade-in { animation: fadeIn 0.6s ease-out; }
-
-/* ===== 响应式 ===== */
-@media (max-width: 600px) {
-  :root { --space-lg: 1.5rem; --space-xl: 2.5rem; }
-  .banner-dharma .oath { font-size: 2.2rem; letter-spacing: 8px; }
-  .page-header h1 { font-size: 1.6rem; letter-spacing: 3px; }
-  .container { padding: var(--space-md) var(--space-sm); }
+/* ===== 祈请文生成器 ===== */
+.prayer-form { max-width: 600px; margin: 0 auto; }
+.prayer-form label { display: block; color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.3rem; font-family: var(--font-sans); }
+.prayer-form input, .prayer-form select {
+  width: 100%; padding: 0.7rem 1rem; margin-bottom: var(--space-sm);
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--text-primary);
+  font-family: var(--font-sans); font-size: 0.9rem; transition: border-color 0.3s;
 }
-
-/* ===== 标签 ===== */
-.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.tag {
-  display: inline-block; font-family: var(--font-sans); font-size: 0.72rem;
-  padding: 0.2rem 0.8rem; background: rgba(255, 200, 80, 0.06);
-  color: var(--text-secondary); border: 1px solid var(--border);
-  border-radius: 20px; transition: all 0.2s;
+.prayer-form input:focus, .prayer-form select:focus {
+  outline: none; border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(255, 200, 80, 0.1);
 }
-.tag:hover { border-color: var(--border-gold); color: var(--gold); }
-.tag-youth { background: rgba(100, 180, 100, 0.08); color: #8BC88B; border-color: rgba(100, 180, 100, 0.15); }
+.prayer-form select option { background: var(--bg-main); color: var(--text-primary); }
+.prayer-result { display: none; margin-top: var(--space-lg); animation: fadeIn 0.5s ease-out; }
+.prayer-text-block {
+  background: rgba(255, 200, 80, 0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  font-size: 0.88rem;
+  line-height: 2.1;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  font-family: var(--font-serif);
+  max-height: 600px;
+  overflow-y: auto;
+}
 
 /* ===== 功能列表 ===== */
 .func-list { list-style: none; padding: 0; }
 .func-list li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; color: var(--text-secondary); line-height: 1.7; font-family: var(--font-sans); }
 .func-list li::before { content: '✦'; position: absolute; left: 0; color: var(--gold); font-size: 0.55rem; top: 0.7rem; }
+
+/* ===== 二十一司导航网格（about页） ===== */
+.si-nav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.4rem; }
+.si-nav-item {
+  display: block; padding: 0.5rem;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 8px; text-align: center;
+  color: var(--text-secondary); text-decoration: none;
+  font-size: 0.82rem; font-family: var(--font-sans);
+  transition: all 0.3s;
+}
+.si-nav-item:hover { background: var(--bg-card-hover); border-color: var(--border-gold); color: var(--gold-light); }
+
+/* ===== 护青公益特色 ===== */
+.youth-banner {
+  background: linear-gradient(135deg, rgba(100, 180, 100, 0.08), rgba(255, 200, 80, 0.04));
+  border: 1px solid rgba(100, 180, 100, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+.youth-banner h2 { color: #8BC88B; font-size: 1.6rem; letter-spacing: 4px; margin-bottom: var(--space-sm); }
+.youth-principles {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-sm);
+  margin: var(--space-lg) 0;
+}
+.youth-principle {
+  text-align: center; padding: var(--space-md);
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.youth-principle .num { font-size: 2rem; color: var(--gold); font-family: var(--font-hand); }
+.youth-principle h4 { color: var(--gold-light); margin: 0.5rem 0 0.3rem; font-size: 1rem; }
+.youth-principle p { color: var(--text-muted); font-size: 0.82rem; line-height: 1.7; }
+
+/* ===== 联系页面 ===== */
+.contact-info { text-align: center; max-width: 600px; margin: 0 auto; }
+.contact-info .name { font-size: 1.2rem; color: var(--gold-light); font-family: var(--font-hand); letter-spacing: 3px; }
+.contact-info .detail { color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.3rem; }
+.contact-info .note { color: var(--text-muted); font-size: 0.82rem; margin-top: var(--space-sm); line-height: 1.8; }
+
+/* ===== 动画 ===== */
+/* ===== 焦点样式（键盘可访问性） ===== */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.nav-links a:focus-visible { outline-offset: 2px; }
+.accordion:focus-visible { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold-glow); }
+.copy-btn:focus-visible, .btn:focus-visible { outline-offset: 2px; }
+
+/* ===== 选中文本样式 ===== */
+::selection { background: rgba(255, 200, 80, 0.3); color: var(--text-primary); }
+
+/* ===== 动画 ===== */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes glowPulse { 0%, 100% { box-shadow: 0 0 20px var(--gold-glow); } 50% { box-shadow: 0 0 40px var(--gold-glow); } }
+.fade-in { animation: fadeIn 0.6s ease-out; }
+.fade-in-up { animation: fadeInUp 0.7s ease-out; }
+.glow-pulse { animation: glowPulse 3s ease-in-out infinite; }
+
+/* 卡片交错动画 */
+.grid .card:nth-child(1) { animation-delay: 0.05s; }
+.grid .card:nth-child(2) { animation-delay: 0.15s; }
+.grid .card:nth-child(3) { animation-delay: 0.25s; }
+.grid .card:nth-child(4) { animation-delay: 0.35s; }
+.heart-six .card:nth-child(1) { animation-delay: 0.05s; }
+.heart-six .card:nth-child(2) { animation-delay: 0.12s; }
+.heart-six .card:nth-child(3) { animation-delay: 0.19s; }
+.heart-six .card:nth-child(4) { animation-delay: 0.26s; }
+.heart-six .card:nth-child(5) { animation-delay: 0.33s; }
+.heart-six .card:nth-child(6) { animation-delay: 0.40s; }
+
+/* ===== 滚动条样式（Webkit） ===== */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-gold); }
+
+/* ===== 打印样式 ===== */
+@media print {
+  body { background: #fff; color: #222; }
+  nav, .back-top, footer, .btn, .copy-btn, .nav-toggle { display: none !important; }
+  .container { max-width: 100%; padding: 0; }
+  .card { background: #fff; border: 1px solid #ccc; box-shadow: none; break-inside: avoid; }
+  .banner-dharma { border: 1px solid #ccc; background: #fafafa; }
+  .prayer-text-block, .prayer-text { background: #f5f5f5; border: 1px solid #ddd; color: #222; }
+  .accordion-panel { max-height: none !important; overflow: visible !important; padding: 1rem !important; border: 1px solid #ddd; margin-bottom: 0.5rem; }
+  .accordion { border: 1px solid #ccc; background: #f5f5f5; color: #222; }
+  .accordion .arrow { display: none; }
+  .page-header::before, .page-header::after { opacity: 0.2; }
+  .divider { opacity: 0.3; color: #666; }
+  a { color: #555; text-decoration: underline; }
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 900px) {
+  .nav-toggle { display: block; }
+  .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--bg-main); border-bottom: 1px solid var(--border); flex-direction: column; padding: var(--space-sm); }
+  .nav-links.open { display: flex; }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .youth-principles { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  :root { --space-lg: 1.5rem; --space-xl: 2.5rem; }
+  .banner-dharma .oath { font-size: 2.2rem; letter-spacing: 8px; }
+  .page-header h1 { font-size: 1.6rem; letter-spacing: 3px; }
+  .container { padding: var(--space-md) var(--space-sm); }
+  .accordion { flex-wrap: wrap; gap: 0.3rem; }
+  .accordion .si-gods { margin-left: 0; width: 100%; }
+  .banner-dharma { padding: var(--space-xl) var(--space-sm); }
+}

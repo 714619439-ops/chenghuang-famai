@@ -1,130 +1,223 @@
-/* ===== 城隍法脉 · 全局功能 ===== */
+/**
+ * 城隍法脉 · 二十一司护法系统 · 主脚本
+ * 导航切换、手风琴展开（事件委托）、复制反馈、回到顶部、祈请文生成器
+ */
 
-// === 导航切换（移动端汉堡菜单） ===
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+  // ===== 导航切换 =====
   var toggle = document.querySelector('.nav-toggle');
-  var navLinks = document.querySelector('.nav-links');
-  if (toggle) {
-    toggle.addEventListener('click', function() {
-      navLinks.classList.toggle('open');
+  var links = document.querySelector('.nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', function () {
+      var isOpen = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+    // 点击导航链接后自动收起菜单（移动端）
+    links.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        links.classList.remove('open');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      });
     });
   }
-  document.querySelectorAll('.nav-links a').forEach(function(a) {
-    a.addEventListener('click', function() {
-      navLinks.classList.remove('open');
-    });
-  });
 
-  // 高亮当前页面导航
-  var currentPath = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links a').forEach(function(a) {
-    if (a.getAttribute('href') === currentPath) {
-      a.classList.add('active');
+  // ===== 回到顶部 =====
+  var backTop = document.querySelector('.back-top');
+  if (backTop) {
+    backTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    window.addEventListener('scroll', function () {
+      backTop.classList.toggle('visible', window.scrollY > 400);
+    });
+  }
+
+  // ===== 手风琴（事件委托，支持动态生成的内容） =====
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.accordion');
+    if (!btn) return;
+
+    var panel = btn.nextElementSibling;
+    if (!panel || !panel.classList.contains('accordion-panel')) return;
+
+    var isOpen = panel.classList.contains('open');
+
+    // 关闭所有
+    document.querySelectorAll('.accordion-panel.open').forEach(function (p) {
+      p.classList.remove('open');
+    });
+    document.querySelectorAll('.accordion.active').forEach(function (b) {
+      b.classList.remove('active');
+    });
+
+    // 打开当前
+    if (!isOpen) {
+      panel.classList.add('open');
+      btn.classList.add('active');
+
+      // 展开后滚动到可视区域
+      setTimeout(function () {
+        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
     }
   });
 
-  // 返回顶部按钮
-  var backTop = document.querySelector('.back-top');
-  if (backTop) {
-    window.addEventListener('scroll', function() {
-      window.scrollY > 400 ? backTop.classList.add('visible') : backTop.classList.remove('visible');
+  // ===== 手风琴键盘支持（Enter/Space） =====
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      var btn = e.target.closest('.accordion');
+      if (btn) {
+        e.preventDefault();
+        btn.click();
+      }
+    }
+  });
+
+  // ===== 复制按钮（事件委托） =====
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.copy-btn');
+    if (!btn) return;
+
+    var targetId = btn.getAttribute('data-target');
+    if (!targetId) return;
+    var textEl = document.getElementById(targetId);
+    if (!textEl) return;
+
+    var text = textEl.textContent || textEl.innerText;
+    var textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand('copy');
+      var orig = btn.textContent;
+      btn.textContent = '✓ 已复制';
+      btn.disabled = true;
+      setTimeout(function () {
+        btn.textContent = orig;
+        btn.disabled = false;
+      }, 2000);
+    } catch (e) {
+      // fallback
+    }
+    document.body.removeChild(textarea);
+  });
+
+  // ===== 祈请文生成器 =====
+  var generateBtn = document.getElementById('generate-btn');
+  var nameInput = document.getElementById('prayer-name');
+  var dharmaInput = document.getElementById('prayer-dharma');
+  var siSelect = document.getElementById('prayer-si');
+  var resultBox = document.getElementById('prayer-result');
+  var resultContent = document.getElementById('prayer-content');
+
+  // 填充司署下拉
+  if (siSelect && typeof SIXI_DATA !== 'undefined') {
+    SIXI_DATA.forEach(function (si) {
+      var opt = document.createElement('option');
+      opt.value = si.id;
+      opt.textContent = si.nameFull + ' · ' + si.name;
+      siSelect.appendChild(opt);
     });
-    backTop.addEventListener('click', function() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  if (generateBtn) {
+    generateBtn.addEventListener('click', function () {
+      var name = nameInput ? nameInput.value.trim() : '';
+      var dharma = dharmaInput ? dharmaInput.value.trim() : '';
+      var siId = siSelect ? parseInt(siSelect.value) : 0;
+
+      if (!name) { alert('请输入您的姓名'); nameInput.focus(); return; }
+      if (!siId) { alert('请选择司署'); siSelect.focus(); return; }
+
+      var si = SIXI_DATA[siId - 1];
+      if (!si) { alert('司署数据未找到'); return; }
+
+      var prayer = si.prayer;
+      var namePart = name;
+      if (dharma) namePart += '（法号' + dharma + '）';
+      prayer = prayer.replace(/弟子〇〇〇（法号〇〇〇）/g, '弟子' + namePart);
+      prayer = prayer.replace(/弟子〇〇〇/g, '弟子' + name);
+
+      if (resultContent) {
+        resultContent.textContent = prayer;
+        // 通知屏幕阅读器
+        resultContent.setAttribute('aria-live', 'polite');
+      }
+      if (resultBox) {
+        resultBox.style.display = 'block';
+        resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      // 更新复制按钮的 data-target
+      var copyBtn = resultBox.querySelector('.copy-btn');
+      if (copyBtn) {
+        copyBtn.setAttribute('data-target', 'prayer-content');
+      }
     });
+
+    // Enter 键触发生成
+    var inputs = [nameInput, dharmaInput, siSelect];
+    inputs.forEach(function (el) {
+      if (el) {
+        el.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') generateBtn.click();
+        });
+      }
+    });
+  }
+
+  // ===== 首页心六宫格 =====
+  var heartGrid = document.getElementById('heart-six-grid');
+  if (heartGrid && typeof SIXI_DATA !== 'undefined') {
+    var heartIds = [5, 6, 2, 7, 1, 20];
+    var h = '';
+    heartIds.forEach(function (id) {
+      var si = SIXI_DATA[id - 1];
+      if (!si) return;
+      h += '<div class="card card-gold fade-in">' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:var(--space-sm)">' +
+          '<div><span class="si-num">第' + (id < 10 ? '0' : '') + id + '司</span>' +
+          '<h3 style="margin:0.2rem 0;font-size:1.1rem;color:var(--gold-light)">' + si.name + '</h3></div>' +
+          '<span class="tag tag-youth">护佑青少年</span>' +
+        '</div>' +
+        '<p style="color:var(--text-muted);font-size:0.82rem;margin-bottom:var(--space-sm)">' + si.gods + '</p>' +
+        '<p style="font-size:0.88rem;line-height:1.8;color:var(--text-secondary)">' + si.desc + '</p>' +
+        '<a href="all-si.html#' + si.name + '" style="color:var(--gold);text-decoration:none;font-size:0.8rem;display:inline-block;margin-top:var(--space-sm)">查看详情 →</a>' +
+      '</div>';
+    });
+    heartGrid.innerHTML = h;
+  }
+
+  // ===== 护青公益：心育六司卡片渲染 =====
+  var heartSixGrid = document.getElementById('heart-six-grid-detail');
+  if (heartSixGrid && typeof SIXI_DATA !== 'undefined') {
+    var html = '';
+    var HEART_SIX_IDS = [5, 6, 2, 7, 1, 20];
+    var topicMap = {
+      5: '对应：焦虑、抑郁、情绪不稳定',
+      6: '对应：失眠、噩梦、神经衰弱',
+      2: '对应：流感、传染病、免疫力低下',
+      7: '对应：久病不愈、药效不佳、慢性病',
+      1: '对应：感冒、过敏、体质虚弱',
+      20: '对应：家庭氛围、家宅安宁、居住环境'
+    };
+    HEART_SIX_IDS.forEach(function (id) {
+      var si = SIXI_DATA[id - 1];
+      if (!si) return;
+      html += '<div class="card card-gold fade-in">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-sm)">' +
+          '<div><span class="si-num">第' + (id < 10 ? '0' : '') + id + '司</span>' +
+          '<h3 style="margin:0.3rem 0 0;font-size:1.2rem;color:var(--gold-light)">' + si.name + '</h3></div>' +
+        '</div>' +
+        '<p style="color:var(--text-muted);font-size:0.82rem;margin-bottom:var(--space-sm)">主司：' + si.gods + '</p>' +
+        '<p style="font-size:0.88rem;line-height:1.9;color:var(--text-secondary)">' + si.desc + '</p>' +
+        '<p style="font-size:0.82rem;line-height:1.8;color:var(--gold);margin-top:var(--space-sm)">' + (topicMap[id] || '') + '</p>' +
+        '<a href="all-si.html#' + si.name + '" style="color:var(--gold);text-decoration:none;font-size:0.8rem;display:inline-block;margin-top:var(--space-sm)">查看详情 →</a>' +
+      '</div>';
+    });
+    heartSixGrid.innerHTML = html;
   }
 });
-
-// === 复制文本 ===
-function copyText(text, btn) {
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(function() {
-      if (btn) { btn.classList.add('copied'); var orig = btn.textContent; btn.textContent = '已复制 ✓'; setTimeout(function() { btn.textContent = orig; btn.classList.remove('copied'); }, 2000); }
-    }).catch(function() { fallbackCopy(text, btn); });
-  } else { fallbackCopy(text, btn); }
-}
-
-function fallbackCopy(text, btn) {
-  var ta = document.createElement('textarea');
-  ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-  document.body.appendChild(ta); ta.select();
-  try { document.execCommand('copy'); if (btn) { btn.classList.add('copied'); var orig = btn.textContent; btn.textContent = '已复制 ✓'; setTimeout(function() { btn.textContent = orig; btn.classList.remove('copied'); }, 2000); } }
-  catch(e) { alert('复制失败'); }
-  document.body.removeChild(ta);
-}
-
-// === 渲染各司详情页 — 兼容 SIXI_DATA 数据格式 ===
-function renderSiPage(si) {
-  if (!si) return;
-  document.title = si.name + ' - 城隍法脉·二十一司护法系统';
-
-  // 头部
-  var headerEl = document.getElementById('si-header');
-  if (headerEl) {
-    var num = (si.id < 10 ? '0' : '') + si.id;
-    var gods = si.god1 + (si.god2 ? ' · ' + si.god2 : '');
-    headerEl.innerHTML =
-      '<div class="si-detail-header fade-in">' +
-        '<div class="si-number-badge">第' + num + '司</div>' +
-        '<h1>' + si.name + '</h1>' +
-        '<p class="gods">' + gods + '</p>' +
-        '<p style="color:var(--text-light);margin-top:0.5rem;font-size:0.9rem">' + (si.pinyin || '') + '</p>' +
-        '<p style="color:var(--text-light);margin-top:0.5rem;font-size:0.9rem">' + si.keyword + '</p>' +
-      '</div>';
-  }
-
-  // 职能
-  var funcEl = document.getElementById('si-funcs');
-  if (funcEl && si.funcs) {
-    funcEl.innerHTML = si.funcs.map(function(f) { return '<li>' + f + '</li>'; }).join('');
-  }
-
-  // 适用场景
-  var sceneEl = document.getElementById('si-scenarios');
-  if (sceneEl && si.scenarios) {
-    sceneEl.innerHTML = si.scenarios.map(function(s) { return '<span class="tag">' + s + '</span>'; }).join('');
-  }
-
-  // 养护要点
-  var careEl = document.getElementById('si-care');
-  if (careEl && si.care) {
-    careEl.innerHTML = si.care.map(function(c) { return '<li>' + c + '</li>'; }).join('');
-  }
-
-  // 祈请文 — 使用 formatPrayer 动态生成
-  var prayerEl = document.getElementById('si-prayer');
-  if (prayerEl) {
-    prayerEl.textContent = formatPrayer(si);
-  }
-
-  // 复制按钮
-  var copyBtn = document.getElementById('copy-prayer');
-  if (copyBtn) {
-    copyBtn.onclick = function() {
-      var text = document.getElementById('si-prayer').textContent;
-      copyText(text, copyBtn);
-    };
-  }
-}
-
-// === 格式化祈请文 — 根据 SIXI_DATA 生成 ===
-function formatPrayer(si) {
-  var gods = si.god1 + (si.god2 ? '、' + si.god2 : '');
-  return '弟子___（法号___），一心顶礼。\n\n' +
-    '愿以此心，代佛行化；愿以此身，代当境城隍、土地、山神及家宅六神护佑一方。\n\n' +
-    '冥阳苦未尽，誓不成佛道；十方若有苦，寻声必救度。\n\n' +
-    '今发正心正念，恭请城隍法脉二十一司护法，慈悲降临，威光护持。\n\n' +
-    '特请：' + gods + '\n\n' +
-    '伏愿' + (si.funcs ? si.funcs.join('，') : '') + '。\n' +
-    '令弟子及一切众生，远离' + si.name + '相关之苦，身心安泰。\n\n' +
-    '恭请' + si.name + '护法慈悲加持，护持弟子' + (si.funcs ? si.funcs.slice(0,2).join('，') : '') + '，\n' +
-    '令' + (si.keyword || '身心') + '调和，内外清净。\n\n' +
-    '南无' + si.name + '护法菩萨（三遍）\n\n' +
-    '愿以此祈请' + si.name + '功德，回向尽虚空遍法界一切众生，\n' +
-    '愿众生远离' + si.name + '诸苦，身心康宁[合十]\n\n' +
-    '【恭请鉴察】\n' +
-    '南无幽冥教主地藏王菩萨\n' +
-    '南无护法韦驮尊天菩萨\n' +
-    '当境城隍尊神、土地正神、' + si.name + '护法鉴察\n' +
-    '弟子___顶礼 🙏🙏🙏';
-}

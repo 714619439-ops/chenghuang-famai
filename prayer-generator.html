@@ -3,71 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="祈请文生成器 — 选择二十一司自动生成对应祈请文，一键复制。">
-  <title>祈请文生成 · 城隍法脉</title>
+  <meta name="description" content="城隍法脉祈请文生成器——输入姓名选择司署，一键生成专属祈请文。支持二十一司全部司署。">
+  <meta property="og:title" content="祈请文生成器 | 城隍法脉">
+  <meta property="og:description" content="一键生成专属祈请文">
+  <meta name="theme-color" content="#1A0F0A">
+  <title>祈请文生成器 · 城隍法脉</title>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#F5F0EB">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap');
-    .generator-form { max-width:600px; margin: 0 auto var(--space-lg); }
-    .generator-form label { display: block; margin-bottom: 0.3rem; font-size: 0.9rem; color: var(--text); }
-    .generator-form select, .generator-form input, .generator-form textarea {
-      width: 100%; padding: 0.6rem 0.8rem; margin-bottom: var(--space-sm);
-      border: 1px solid var(--border); border-radius: var(--radius);
-      font-family: var(--font-sans); font-size: 0.9rem; background: var(--bg-card);
-      color: var(--text);
-    }
-    .generator-form textarea { min-height: 80px; resize: vertical; }
-    .generator-form .btn { margin-top: var(--space-xs); }
-  </style>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23050302'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-size='52' font-family='serif' fill='%23FFC850'%3E城%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'%3E%3Crect width='1200' height='630' fill='%23050302'/%3E%3Ctext x='600' y='280' text-anchor='middle' font-size='72' font-family='serif' fill='%23FFC850'%3E城隍法脉%3C/text%3E%3Ctext x='600' y='370' text-anchor='middle' font-size='32' font-family='serif' fill='%23FFF8EE'%3E二十一司护法系统%3C/text%3E%3Ctext x='600' y='460' text-anchor='middle' font-size='26' font-family='serif' fill='%23B8A898'%3E冥阳苦未尽 · 誓不成佛道%3C/text%3E%3C/svg%3E">
 </head>
 <body>
-  <nav>
+  <nav aria-label="主导航">
     <div class="nav-inner">
       <a href="index.html" class="nav-brand">城隍<span>法脉</span></a>
-      <button class="nav-toggle">☰</button>
+      <button class="nav-toggle" aria-label="切换导航菜单" aria-expanded="false">☰</button>
       <ul class="nav-links">
         <li><a href="index.html">首页</a></li>
         <li><a href="all-si.html">二十一司</a></li>
         <li><a href="about.html">认识法脉</a></li>
-        <li><a href="protect-youth.html">护青公益</a></li>
+        <li><a href="protect-youth.html">护佑青少年</a></li>
         <li><a href="rituals.html">功课仪轨</a></li>
         <li><a href="prayer-generator.html" class="active">祈请文</a></li>
-        <li><a href="contact.html">关于</a></li>
+        <li><a href="contact.html">联系</a></li>
       </ul>
     </div>
   </nav>
 
   <main>
     <div class="container">
-      <div class="page-header fade-in">
+      <div class="page-header">
         <h1>祈请文生成器</h1>
-        <p>选择司号 · 输入姓名 · 自动生成 · 一键复制</p>
+        <p>输入姓名与司署，一键生成专属祈请文</p>
       </div>
 
-      <div class="generator-form">
-        <label for="si-select">① 选择司署</label>
-        <select id="si-select">
+      <div class="prayer-form">
+        <label for="prayer-name">请输入您的姓名</label>
+        <input type="text" id="prayer-name" placeholder="例如：张三" required>
+
+        <label for="prayer-dharma">法号（选填）</label>
+        <input type="text" id="prayer-dharma" placeholder="例如：妙如广华子">
+
+        <label for="prayer-si">请选择司署</label>
+        <select id="prayer-si">
           <option value="">— 请选择 —</option>
         </select>
 
-        <label for="prayer-name">② 您的姓名（或法号）</label>
-        <input type="text" id="prayer-name" placeholder="例：张三 / 妙如" value="弟子___">
-
-        <div style="display:flex;gap:var(--space-sm)">
-          <button class="btn btn-gold" onclick="generatePrayer()" style="flex:1">🙏 生成祈请文</button>
-          <button class="btn btn-outline" onclick="resetForm()">重置</button>
-        </div>
+        <button class="btn btn-gold" id="generate-btn" style="width:100%;margin-top:var(--space-sm)">🙏 生成祈请文</button>
       </div>
 
-      <div id="prayer-result" style="display:none">
-        <div class="card card-gold">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-sm);flex-wrap:wrap;gap:0.5rem">
-            <h3 class="section-title" style="border:none;margin:0;padding:0" id="result-title">祈请文</h3>
-            <button class="copy-btn" id="copy-result">📋 复制</button>
-          </div>
-          <div class="prayer-text" id="result-text" style="line-height:2.2;white-space:pre-wrap"></div>
+      <div class="prayer-result" id="prayer-result">
+        <div class="divider">✦ ✦ ✦</div>
+        <h3 style="color:var(--gold-light);text-align:center;margin-bottom:var(--space-md);letter-spacing:3px">您的祈请文</h3>
+        <div class="prayer-text-block" id="prayer-content"></div>
+        <div style="text-align:center;margin-top:var(--space-md)">
+          <button class="btn btn-gold btn-sm copy-btn" data-target="prayer-content">📋 复制祈请文</button>
         </div>
       </div>
     </div>
@@ -75,65 +68,13 @@
 
   <footer>
     <div class="footer-brand">城隍法脉 · 二十一司护法系统</div>
-    <div class="footer-oath">冥阳苦未尽 · 誓不成佛道 · 十方若有苦 · 寻声必救度</div>
-    <p>纯公益平台 · 不收取任何费用 · 不替代医疗诊断与治疗</p>
+    <div class="footer-oath">阳间三世 · 积善是宝 · 阴间三善自有公平 · 请君深信因果</div>
+    <p>传统民俗文化 · 城隍法脉</p>
   </footer>
 
   <button class="back-top">↑</button>
 
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
-  <script>
-    // 填充司选择器
-    var sel = document.getElementById('si-select');
-    SIXI_DATA.forEach(function(si) {
-      var opt = document.createElement('option');
-      opt.value = si.id;
-      opt.textContent = '第' + (si.id < 10 ? '0' : '') + si.id + '司 · ' + si.name + ' — ' + si.keyword;
-      sel.appendChild(opt);
-    });
-
-    function generatePrayer() {
-      var id = parseInt(document.getElementById('si-select').value);
-      var name = document.getElementById('prayer-name').value.trim() || '弟子___';
-      var si = SIXI_DATA.find(function(s) { return s.id === id; });
-      if (!si) { alert('请先选择司署'); return; }
-
-      var gods = si.god1 + (si.god2 ? '、' + si.god2 : '');
-      var text = name + '，一心顶礼。\n\n' +
-        '愿以此心，代佛行化；愿以此身，代当境城隍、土地、山神及家宅六神护佑一方。\n\n' +
-        '冥阳苦未尽，誓不成佛道；十方若有苦，寻声必救度。\n\n' +
-        '今发正心正念，恭请城隍法脉二十一司护法，慈悲降临，威光护持。\n\n' +
-        '特请：' + gods + '\n\n' +
-        '伏愿' + si.funcs.join('，') + '。\n' +
-        '令弟子及一切众生，远离' + si.name + '相关之苦，身心安泰。\n\n' +
-        '恭请' + si.name + '护法慈悲加持，护持弟子' + si.funcs.slice(0, 2).join('，') + '，\n' +
-        '令' + si.keyword + '调和，内外清净。\n\n' +
-        '南无' + si.name + '护法菩萨（三遍）\n\n' +
-        '愿以此祈请' + si.name + '功德，回向尽虚空遍法界一切众生，\n' +
-        '愿众生远离' + si.name + '诸苦，身心康宁[合十]\n\n' +
-        '【恭请鉴察】\n' +
-        '南无幽冥教主地藏王菩萨\n' +
-        '南无护法韦驮尊天菩萨\n' +
-        '当境城隍尊神、土地正神、' + si.name + '护法鉴察\n' +
-        name + '顶礼 🙏🙏🙏';
-
-      document.getElementById('result-title').textContent = '第' + (si.id < 10 ? '0' : '') + si.id + '司 · ' + si.name + '祈请文';
-      document.getElementById('result-text').textContent = text;
-      document.getElementById('prayer-result').style.display = 'block';
-
-      document.getElementById('copy-result').onclick = function() {
-        copyText(text, document.getElementById('copy-result'));
-      };
-    }
-
-    function resetForm() {
-      document.getElementById('si-select').value = '';
-      document.getElementById('prayer-name').value = '弟子___';
-      document.getElementById('prayer-result').style.display = 'none';
-    }
-
-    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
-  </script>
+  <script src="js/data.js" defer></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>
