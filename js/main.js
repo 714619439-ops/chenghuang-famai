@@ -4,6 +4,17 @@
  */
 
 document.addEventListener('DOMContentLoaded', function () {
+  // ===== 滚动进度条 =====
+  var progressBar = document.getElementById('progress-bar');
+  if (progressBar) {
+    window.addEventListener('scroll', function () {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = progress + '%';
+    });
+  }
+
   // ===== 导航切换 =====
   var toggle = document.querySelector('.nav-toggle');
   var links = document.querySelector('.nav-links');
@@ -31,6 +42,26 @@ document.addEventListener('DOMContentLoaded', function () {
       backTop.classList.toggle('visible', window.scrollY > 400);
     });
   }
+
+  // ===== Ctrl+E 快捷键：全部展开/收起 =====
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+      e.preventDefault();
+      var panels = document.querySelectorAll('.accordion-panel');
+      var openPanels = document.querySelectorAll('.accordion-panel.open');
+      var allOpen = openPanels.length === panels.length && panels.length > 0;
+      
+      if (allOpen) {
+        // 全部收起
+        panels.forEach(function (p) { p.classList.remove('open'); });
+        document.querySelectorAll('.accordion.active').forEach(function (b) { b.classList.remove('active'); });
+      } else {
+        // 全部展开
+        panels.forEach(function (p) { p.classList.add('open'); });
+        document.querySelectorAll('.accordion').forEach(function (b) { b.classList.add('active'); });
+      }
+    }
+  });
 
   // ===== 手风琴（事件委托，支持动态生成的内容） =====
   document.addEventListener('click', function (e) {

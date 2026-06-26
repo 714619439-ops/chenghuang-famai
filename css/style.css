@@ -410,7 +410,7 @@ footer p { color: var(--text-muted); font-size: 0.75rem; font-family: var(--font
 /* ===== 打印样式 ===== */
 @media print {
   body { background: #fff; color: #222; }
-  nav, .back-top, footer, .btn, .copy-btn, .nav-toggle { display: none !important; }
+  nav, .back-top, footer, .btn, .copy-btn, .nav-toggle, #progress-bar { display: none !important; }
   .container { max-width: 100%; padding: 0; }
   .card { background: #fff; border: 1px solid #ccc; box-shadow: none; break-inside: avoid; }
   .banner-dharma { border: 1px solid #ccc; background: #fafafa; }
@@ -422,6 +422,29 @@ footer p { color: var(--text-muted); font-size: 0.75rem; font-family: var(--font
   .divider { opacity: 0.3; color: #666; }
   a { color: #555; text-decoration: underline; }
 }
+
+/* ===== 进度条 ===== */
+#progress-bar {
+  position: fixed; top: 0; left: 0; z-index: 999;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-light));
+  box-shadow: 0 0 10px var(--gold-glow);
+  transition: width 0.1s linear;
+}
+
+/* ===== Badge 行 ===== */
+.badge-row { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: var(--space-md); }
+.badge {
+  display: inline-block; font-family: var(--font-sans); font-size: 0.72rem;
+  padding: 0.25rem 0.9rem; background: rgba(255, 248, 240, 0.06);
+  color: var(--text-muted); border: 1px solid var(--border);
+  border-radius: 20px; letter-spacing: 1px; transition: all 0.3s;
+}
+.badge-accent {
+  background: rgba(255, 200, 80, 0.1);
+  color: var(--gold); border-color: var(--border-gold);
+}
+.badge:hover { border-color: var(--border-gold); color: var(--gold); }
 
 /* ===== 响应式 ===== */
 @media (max-width: 900px) {
